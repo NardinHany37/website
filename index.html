@@ -1,0 +1,1199 @@
+# website
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لغتي هويتي — بيشوى سليمان</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.9.0/dist/tabler-icons.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #F5E6C0;
+      --gold-dark: #8B6914;
+      --green: #1D6B44;
+      --green-light: #E8F5EE;
+      --green-dark: #0F4A2E;
+      --bg: #ffffff;
+      --bg2: #f7f7f5;
+      --bg3: #f0f0ec;
+      --text: #1a1a18;
+      --text2: #5a5a55;
+      --border: rgba(0,0,0,0.1);
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a18;
+        --bg2: #222220;
+        --bg3: #2a2a28;
+        --text: #f0f0ec;
+        --text2: #9a9a90;
+        --border: rgba(255,255,255,0.12);
+        --green-light: #0d3020;
+        --gold-light: #3a2e10;
+      }
+    }
+
+    html, body {
+      font-family: 'Segoe UI', 'Cairo', Tahoma, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      direction: rtl;
+    }
+
+    /* ======== HEADER ======== */
+    .header {
+      background: linear-gradient(135deg, #0F4A2E 0%, #1D6B44 55%, #C9A84C 100%);
+      position: sticky; top: 0; z-index: 50;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+    .header-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px; gap: 12px; flex-wrap: wrap;
+    }
+    .logo-section { display: flex; align-items: center; gap: 12px; }
+    .logo-icon {
+      width: 50px; height: 50px; border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(201,168,76,0.55);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+    }
+    .logo-text h1 { color: #fff; font-size: 22px; font-weight: 600; line-height: 1.2; }
+    .logo-text p { color: rgba(255,255,255,0.7); font-size: 12px; margin-top: 2px; }
+    .header-badge {
+      background: rgba(201,168,76,0.22);
+      border: 1px solid rgba(201,168,76,0.5);
+      color: #F5E6C0;
+      font-size: 13px; padding: 5px 14px;
+      border-radius: 20px;
+    }
+
+    /* ======== NAV TABS ======== */
+    .nav-tabs {
+      display: flex;
+      background: rgba(0,0,0,0.22);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      overflow-x: auto;
+    }
+    .nav-tabs::-webkit-scrollbar { height: 0; }
+    .nav-tab {
+      display: flex; align-items: center; gap: 7px;
+      padding: 11px 22px;
+      color: rgba(255,255,255,0.6);
+      font-size: 14px; cursor: pointer;
+      border: none; background: none;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+    .nav-tab.active {
+      color: #F5E6C0;
+      border-bottom-color: #C9A84C;
+      background: rgba(201,168,76,0.14);
+    }
+    .nav-tab:hover:not(.active) { color: #fff; background: rgba(255,255,255,0.08); }
+
+    /* ======== PAGES ======== */
+    .page { display: none; padding: 24px; max-width: 1100px; margin: 0 auto; }
+    .page.active { display: block; }
+
+    /* ======== SECTION HEADER ======== */
+    .section-header {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px; flex-wrap: wrap; gap: 10px;
+    }
+    .section-title {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 18px; font-weight: 600; color: var(--text);
+    }
+    .icon-circle {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--green-light);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green); font-size: 17px;
+    }
+
+    /* ======== BUTTONS ======== */
+    .btn-add {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--green); color: #fff;
+      border: none; border-radius: var(--radius-md);
+      padding: 9px 16px; font-size: 14px;
+      cursor: pointer; font-family: inherit; font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-add:hover { background: var(--green-dark); }
+
+    .btn-submit {
+      width: 100%; padding: 11px;
+      background: var(--green); color: #fff;
+      border: none; border-radius: var(--radius-md);
+      font-size: 15px; cursor: pointer;
+      font-family: inherit; font-weight: 500;
+      transition: background 0.2s;
+    }
+    .btn-submit:hover { background: var(--green-dark); }
+
+    .btn-action {
+      flex: 1; padding: 7px; border-radius: var(--radius-md);
+      border: 0.5px solid var(--border);
+      background: none; cursor: pointer;
+      font-size: 13px; color: var(--text2);
+      font-family: inherit; transition: background 0.15s;
+    }
+    .btn-action:hover { background: var(--bg2); }
+    .btn-action.danger { color: #A32D2D; border-color: rgba(163,45,45,0.3); }
+
+    /* ======== VIDEO GRID ======== */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .video-card {
+      background: var(--bg2);
+      border-radius: var(--radius-xl);
+      border: 0.5px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .video-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .video-thumb {
+      width: 100%; height: 130px;
+      background: linear-gradient(135deg, #0F4A2E, #1D6B44);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .play-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      border: 2px solid rgba(255,255,255,0.6);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: #fff;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .video-thumb:hover .play-btn {
+      background: rgba(255,255,255,0.35);
+      transform: scale(1.08);
+    }
+    .video-meta { padding: 11px 14px; }
+    .video-meta h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .video-meta p { font-size: 12px; color: var(--text2); }
+    .video-tag {
+      display: inline-block; margin-top: 6px;
+      background: var(--green-light); color: var(--green-dark);
+      font-size: 11px; padding: 2px 9px; border-radius: 10px;
+    }
+    .video-actions {
+      padding: 9px 12px;
+      border-top: 0.5px solid var(--border);
+      display: flex; gap: 8px;
+    }
+
+    /* ======== BOOKS GRID ======== */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+    }
+    .book-card {
+      background: var(--bg2);
+      border-radius: var(--radius-xl);
+      border: 0.5px solid var(--border);
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .book-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+    .book-cover {
+      height: 150px;
+      display: flex; align-items: center;
+      justify-content: center; font-size: 52px;
+    }
+    .book-cover.arabic { background: linear-gradient(135deg, #1D6B44, #C9A84C); }
+    .book-cover.pdf    { background: linear-gradient(135deg, #A32D2D, #D85A30); }
+    .book-cover.text   { background: linear-gradient(135deg, #185FA5, #378ADD); }
+    .book-cover.purple { background: linear-gradient(135deg, #533AB7, #7F77DD); }
+    .book-meta { padding: 11px 13px; }
+    .book-meta h4 { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .book-meta p { font-size: 11px; color: var(--text2); }
+    .book-type {
+      display: inline-block; margin-top: 5px;
+      font-size: 10px; padding: 2px 8px; border-radius: 8px;
+    }
+    .book-type.pdf  { background: #FCEBEB; color: #A32D2D; }
+    .book-type.book { background: var(--green-light); color: var(--green-dark); }
+
+    /* ======== MODAL ======== */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.55); z-index: 200;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: var(--bg);
+      border-radius: var(--radius-xl);
+      width: 100%; max-width: 490px;
+      border: 0.5px solid var(--border);
+      overflow: hidden;
+      animation: slideUp 0.25s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .modal-header {
+      background: linear-gradient(90deg, var(--green-dark), var(--green));
+      padding: 14px 18px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+    }
+    .modal-header h3 { color: #fff; font-size: 15px; font-weight: 600; }
+    .modal-close {
+      background: none; border: none;
+      color: rgba(255,255,255,0.75);
+      cursor: pointer; font-size: 22px; line-height: 1;
+    }
+    .modal-body { padding: 20px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label {
+      display: block; font-size: 13px;
+      color: var(--text2); margin-bottom: 5px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: 10px 12px;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg2); color: var(--text);
+      font-size: 14px; font-family: inherit;
+      direction: rtl; outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--green); }
+    .form-group textarea { resize: vertical; min-height: 75px; }
+    .form-group input[dir="ltr"] { direction: ltr; text-align: left; }
+
+    /* ======== VIDEO VIEWER ======== */
+    .video-player-mock {
+      background: #0a0a0a;
+      border-radius: var(--radius-lg);
+      aspect-ratio: 16/9;
+      display: flex; align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      color: rgba(255,255,255,0.5);
+      font-size: 14px; text-align: center;
+    }
+    .video-controls {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: var(--bg2);
+      border-radius: var(--radius-md);
+    }
+    .ctrl-btn {
+      background: none; border: none;
+      color: var(--green); font-size: 20px;
+      cursor: pointer; line-height: 1;
+    }
+    .progress-bar {
+      flex: 1; height: 5px;
+      background: var(--bg3);
+      border-radius: 3px;
+      cursor: pointer; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 3px;
+      width: 30%;
+      transition: width 0.3s;
+    }
+    .time-label { font-size: 12px; color: var(--text2); }
+
+    /* ======== CHATBOT ======== */
+    .chat-container {
+      display: flex; flex-direction: column;
+      height: 580px;
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .chat-header {
+      background: linear-gradient(90deg, var(--green-dark), var(--green));
+      padding: 13px 18px;
+      display: flex; align-items: center; gap: 11px;
+    }
+    .chat-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(201,168,76,0.28);
+      border: 1.5px solid rgba(201,168,76,0.55);
+      display: flex; align-items: center;
+      justify-content: center; font-size: 20px;
+    }
+    .chat-header-info h4 { color: #fff; font-size: 14px; font-weight: 600; }
+    .chat-header-info p { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 1px; }
+    .online-dot {
+      margin-right: auto; width: 9px; height: 9px;
+      border-radius: 50%; background: #4ade80;
+      box-shadow: 0 0 0 2px rgba(74,222,128,0.3);
+    }
+
+    .chat-source-bar {
+      display: flex; gap: 8px; padding: 10px 14px;
+      background: var(--bg2);
+      border-bottom: 0.5px solid var(--border);
+      overflow-x: auto;
+    }
+    .chat-source-bar::-webkit-scrollbar { height: 0; }
+    .source-btn {
+      display: flex; align-items: center; gap: 5px;
+      padding: 5px 11px; border-radius: 20px;
+      border: 0.5px solid var(--border);
+      background: var(--bg);
+      font-size: 12px; color: var(--text2);
+      cursor: pointer; font-family: inherit;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .source-btn.active {
+      background: var(--green-light);
+      border-color: var(--green);
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+    .source-btn:hover:not(.active) { background: var(--bg3); }
+
+    .chat-messages {
+      flex: 1; overflow-y: auto;
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .chat-messages::-webkit-scrollbar { width: 4px; }
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(29,107,68,0.2);
+      border-radius: 2px;
+    }
+
+    .msg {
+      display: flex; gap: 9px;
+      align-items: flex-start; max-width: 88%;
+    }
+    .msg.user { margin-right: auto; flex-direction: row-reverse; }
+    .msg.bot  { margin-left: auto; }
+    .msg-avatar {
+      width: 30px; height: 30px; border-radius: 50%;
+      display: flex; align-items: center;
+      justify-content: center; font-size: 14px;
+      flex-shrink: 0;
+    }
+    .msg.user .msg-avatar { background: var(--green-light); }
+    .msg.bot  .msg-avatar { background: var(--gold-light); }
+    .msg-bubble {
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 14px; line-height: 1.65;
+    }
+    .msg.user .msg-bubble {
+      background: var(--green); color: #fff;
+      border-bottom-left-radius: 4px;
+    }
+    .msg.bot .msg-bubble {
+      background: var(--bg2); color: var(--text);
+      border: 0.5px solid var(--border);
+      border-bottom-right-radius: 4px;
+    }
+    .msg-source {
+      font-size: 10px; color: var(--text2);
+      margin-top: 4px; padding: 0 4px;
+    }
+
+    .chat-suggestions {
+      display: flex; gap: 8px;
+      padding: 8px 14px;
+      border-bottom: 0.5px solid var(--border);
+      overflow-x: auto;
+    }
+    .chat-suggestions::-webkit-scrollbar { height: 0; }
+    .suggest-btn {
+      padding: 6px 13px; border-radius: 20px;
+      border: 0.5px solid var(--border);
+      background: var(--bg);
+      font-size: 12px; color: var(--text2);
+      cursor: pointer; font-family: inherit;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .suggest-btn:hover { background: var(--green-light); color: var(--green-dark); border-color: var(--green); }
+
+    .chat-input-area {
+      padding: 12px 16px;
+      border-top: 0.5px solid var(--border);
+      background: var(--bg2);
+      display: flex; gap: 9px; align-items: flex-end;
+    }
+    #chatInput {
+      flex: 1; padding: 10px 15px;
+      border: 0.5px solid var(--border);
+      border-radius: 22px;
+      background: var(--bg); color: var(--text);
+      font-size: 14px; font-family: inherit;
+      direction: rtl; resize: none;
+      max-height: 90px; line-height: 1.5;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #chatInput:focus { border-color: var(--green); }
+    .btn-send {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--green); color: #fff;
+      border: none; display: flex;
+      align-items: center; justify-content: center;
+      cursor: pointer; font-size: 17px;
+      flex-shrink: 0; transition: background 0.2s;
+    }
+    .btn-send:hover { background: var(--green-dark); }
+    .btn-send:disabled { background: var(--bg3); color: var(--text2); cursor: not-allowed; }
+
+    /* ======== TYPING DOTS ======== */
+    .typing-dots { display: flex; gap: 5px; padding: 2px 0; }
+    .typing-dots span {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold); animation: tdBounce 1.3s infinite;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes tdBounce {
+      0%, 75%, 100% { transform: translateY(0); opacity: 0.4; }
+      35%            { transform: translateY(-7px); opacity: 1; }
+    }
+
+    /* ======== FOOTER ======== */
+    .footer {
+      background: var(--green-dark);
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 13px; font-size: 13px;
+      margin-top: 30px;
+    }
+    .footer span { color: var(--gold); font-weight: 600; }
+
+    /* ======== EMPTY STATE ======== */
+    .empty-state {
+      text-align: center; padding: 50px 20px;
+      color: var(--text2);
+    }
+    .empty-state .ei { font-size: 52px; margin-bottom: 12px; }
+    .empty-state p { font-size: 14px; }
+
+    /* ======== RESPONSIVE ======== */
+    @media (max-width: 600px) {
+      .header-inner { padding: 10px 14px; }
+      .logo-text h1 { font-size: 18px; }
+      .page { padding: 14px; }
+      .video-grid { grid-template-columns: 1fr 1fr; }
+      .books-grid { grid-template-columns: 1fr 1fr; }
+      .chat-container { height: 520px; }
+    }
+    @media (max-width: 380px) {
+      .video-grid { grid-template-columns: 1fr; }
+      .books-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo-section">
+        <div class="logo-icon">📖</div>
+        <div class="logo-text">
+          <h1>لُغَتي هُوِيَّتي</h1>
+          <p>منصة تعليمية متكاملة للغة العربية</p>
+        </div>
+      </div>
+      <div class="header-badge">بيشوى سليمان</div>
+    </div>
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-tab active" role="tab" aria-selected="true" onclick="showPage('videos',this)">
+        <i class="ti ti-video" aria-hidden="true"></i> الفيديوهات
+      </button>
+      <button class="nav-tab" role="tab" aria-selected="false" onclick="showPage('books',this)">
+        <i class="ti ti-books" aria-hidden="true"></i> الكتب والملفات
+      </button>
+      <button class="nav-tab" role="tab" aria-selected="false" onclick="showPage('chatbot',this)">
+        <i class="ti ti-message-chatbot" aria-hidden="true"></i> المساعد الذكي
+      </button>
+    </nav>
+  </header>
+
+  <!-- ===== VIDEOS PAGE ===== -->
+  <main id="page-videos" class="page active" role="tabpanel">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="icon-circle"><i class="ti ti-video" aria-hidden="true"></i></div>
+        مكتبة الفيديوهات
+      </div>
+      <button class="btn-add" onclick="openModal('videoModal')">
+        <i class="ti ti-plus" aria-hidden="true"></i> إضافة فيديو
+      </button>
+    </div>
+
+    <div class="video-grid" id="videoGrid">
+      <div class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(135deg,#0F4A2E,#1D6B44)"
+             onclick="openVideoViewer('مقدمة في النحو العربي','د. أحمد فؤاد')">
+          <div class="play-btn"><i class="ti ti-player-play" aria-hidden="true"></i></div>
+        </div>
+        <div class="video-meta">
+          <h4>مقدمة في النحو العربي</h4>
+          <p>بيشوى سليمان</p>
+          <span class="video-tag">نحو وصرف</span>
+        </div>
+        <div class="video-actions">
+          <button class="btn-action" onclick="copyLink('مقدمة في النحو العربي')">
+            <i class="ti ti-share" aria-hidden="true"></i> مشاركة
+          </button>
+          <button class="btn-action danger" onclick="deleteCard(this,'video-card')">
+            <i class="ti ti-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+     <div class="video-card">
+    <div class="video-thumb"
+         style="background:linear-gradient(135deg,#8B6914,#C9A84C)">
+
+        <div class="play-btn">
+            <i class="ti ti-player-play" aria-hidden="true"></i>
+        </div>
+
+        <video width="100%" controls>
+            <source src="videos/VID20260624144450.mp4" type="video/mp4">
+            متصفحك لا يدعم الفيديو.
+        </video>
+
+    </div>
+</div>
+        <div class="video-meta">
+          <h4>فن الإلقاء والخطابة</h4>
+          <p>أ. مصطفى كمال</p>
+          <span class="video-tag">مهارات لغوية</span>
+        </div>
+        <div class="video-actions">
+          <button class="btn-action" onclick="copyLink('فن الإلقاء والخطابة')">
+            <i class="ti ti-share" aria-hidden="true"></i> مشاركة
+          </button>
+          <button class="btn-action danger" onclick="deleteCard(this,'video-card')">
+            <i class="ti ti-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(135deg,#185FA5,#378ADD)"
+             onclick="openVideoViewer('أسرار البلاغة العربية','د. سامية حسين')">
+          <div class="play-btn"><i class="ti ti-player-play" aria-hidden="true"></i></div>
+        </div>
+        <div class="video-meta">
+          <h4>أسرار البلاغة العربية</h4>
+          <p>د. سامية حسين</p>
+          <span class="video-tag">بلاغة</span>
+        </div>
+        <div class="video-actions">
+          <button class="btn-action" onclick="copyLink('أسرار البلاغة العربية')">
+            <i class="ti ti-share" aria-hidden="true"></i> مشاركة
+          </button>
+          <button class="btn-action danger" onclick="deleteCard(this,'video-card')">
+            <i class="ti ti-trash" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== BOOKS PAGE ===== -->
+  <main id="page-books" class="page" role="tabpanel">
+    <div class="section-header">
+      <div class="section-title">
+        <div class="icon-circle"><i class="ti ti-books" aria-hidden="true"></i></div>
+        مكتبة الكتب والملفات
+      </div>
+      <button class="btn-add" onclick="openModal('bookModal')">
+        <i class="ti ti-plus" aria-hidden="true"></i> إضافة كتاب / PDF
+      </button>
+    </div>
+
+    <div class="books-grid" id="booksGrid">
+      <div class="book-card" onclick="goToChat('قواعد اللغة العربية الميسرة')">
+        <div class="book-cover arabic">📗</div>
+        <div class="book-meta">
+          <h4>قواعد اللغة العربية الميسرة</h4>
+          <p>ابن هشام الأنصاري</p>
+          <span class="book-type book">كتاب</span>
+        </div>
+      </div>
+      <div class="book-card" onclick="goToChat('منهج تعليم النحو')">
+        <div class="book-cover pdf">📕</div>
+        <div class="book-meta">
+          <h4>منهج تعليم النحو</h4>
+          <p>ملف PDF</p>
+          <span class="book-type pdf">PDF</span>
+        </div>
+      </div>
+      <div class="book-card" onclick="goToChat('فصيح الكلام وصحيحه')">
+        <div class="book-cover text">📘</div>
+        <div class="book-meta">
+          <h4>فصيح الكلام وصحيحه</h4>
+          <p>ثعلب</p>
+          <span class="book-type book">كتاب</span>
+        </div>
+      </div>
+      <div class="book-card" onclick="goToChat('محاضرات في اللسانيات')">
+        <div class="book-cover purple">📙</div>
+        <div class="book-meta">
+          <h4>محاضرات في اللسانيات</h4>
+          <p>ملف PDF</p>
+          <span class="book-type pdf">PDF</span>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:var(--text2);margin-top:18px;text-align:center;">
+      <i class="ti ti-info-circle" style="vertical-align:-2px;margin-left:4px" aria-hidden="true"></i>
+      انقر على أي كتاب أو PDF للانتقال للمساعد الذكي وسؤاله عنه
+    </p>
+  </main>
+
+  <!-- ===== CHATBOT PAGE ===== -->
+  <main id="page-chatbot" class="page" role="tabpanel">
+    <div class="section-title" style="margin-bottom:16px">
+      <div class="icon-circle"><i class="ti ti-message-chatbot" aria-hidden="true"></i></div>
+      المساعد الذكي
+    </div>
+
+    <div class="chat-container" role="log" aria-live="polite">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-header-info">
+          <h4>مساعد لغتي هويتي</h4>
+          <p>يجيب على أسئلتك من الكتب والملفات</p>
+        </div>
+        <div class="online-dot" title="متصل الآن"></div>
+      </div>
+
+      <div class="chat-source-bar" id="sourceBar" aria-label="اختيار المصدر">
+        <button class="source-btn active" onclick="setSource(this,'الكل')">
+          <i class="ti ti-sparkles" aria-hidden="true"></i> الكل
+        </button>
+        <button class="source-btn" onclick="setSource(this,'قواعد اللغة العربية الميسرة')">
+          <i class="ti ti-book" aria-hidden="true"></i> قواعد اللغة
+        </button>
+        <button class="source-btn" onclick="setSource(this,'منهج تعليم النحو')">
+          <i class="ti ti-file-type-pdf" aria-hidden="true"></i> منهج النحو
+        </button>
+        <button class="source-btn" onclick="setSource(this,'محاضرات في اللسانيات')">
+          <i class="ti ti-file-type-pdf" aria-hidden="true"></i> اللسانيات
+        </button>
+      </div>
+
+      <div class="chat-suggestions" id="chatSuggestions">
+        <button class="suggest-btn" onclick="fillAndSend('ما هي أقسام الكلام في اللغة العربية؟')">أقسام الكلام</button>
+        <button class="suggest-btn" onclick="fillAndSend('اشرح لي الفاعل والمفعول به')">الفاعل والمفعول</button>
+        <button class="suggest-btn" onclick="fillAndSend('ما الفرق بين المعرفة والنكرة؟')">المعرفة والنكرة</button>
+        <button class="suggest-btn" onclick="fillAndSend('ما هي علامات الإعراب؟')">علامات الإعراب</button>
+        <button class="suggest-btn" onclick="fillAndSend('اشرح مفهوم البلاغة العربية')">البلاغة العربية</button>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot">
+          <div class="msg-avatar">🤖</div>
+          <div>
+            <div class="msg-bubble">
+              أهلاً بك في منصة <strong>لغتي هويتي</strong>! 👋<br><br>
+              أنا مساعدك الذكي المتخصص في اللغة العربية. يمكنني الإجابة على أسئلتك من الكتب والملفات المضافة في المنصة.<br><br>
+              اختر مصدراً من الأعلى للتخصيص، أو استخدم الاقتراحات السريعة، أو اكتب سؤالك مباشرة!
+            </div>
+            <div class="msg-source">المساعد الذكي — لغتي هويتي</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <button class="btn-send" id="sendBtn" onclick="sendMessage()" aria-label="إرسال">
+          <i class="ti ti-send" aria-hidden="true"></i>
+        </button>
+        <textarea id="chatInput" rows="1" aria-label="رسالتك"
+          placeholder="اسأل سؤالاً عن اللغة العربية أو الكتب..."
+          onkeydown="handleKey(event)"
+          oninput="autoResize(this)"></textarea>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    منصة <span>لغتي هويتي</span> — تصميم وتطوير <span>بيشوى سليمان</span> &copy; 2025
+  </footer>
+
+  <!-- ===== VIDEO MODAL ===== -->
+  <div class="modal-overlay" id="videoModal" role="dialog" aria-modal="true" aria-label="إضافة فيديو">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="ti ti-video" aria-hidden="true"></i> إضافة فيديو جديد</h3>
+        <button class="modal-close" onclick="closeModal('videoModal')" aria-label="إغلاق">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="videoTitle">عنوان الفيديو *</label>
+          <input type="text" id="videoTitle" placeholder="أدخل عنوان الفيديو" />
+        </div>
+        <div class="form-group">
+          <label for="videoAuthor">اسم المقدم / المدرس</label>
+          <input type="text" id="videoAuthor" placeholder="اسم المدرس أو المقدم" />
+        </div>
+        <div class="form-group">
+          <label for="videoUrl">رابط الفيديو (YouTube أو رابط مباشر)</label>
+          <input type="url" id="videoUrl" placeholder="https://youtube.com/..." dir="ltr" />
+        </div>
+        <div class="form-group">
+          <label for="videoCategory">التصنيف</label>
+          <select id="videoCategory">
+            <option>نحو وصرف</option>
+            <option>بلاغة</option>
+            <option>مهارات لغوية</option>
+            <option>أدب عربي</option>
+            <option>لغويات</option>
+            <option>قراءة وكتابة</option>
+            <option>أخرى</option>
+          </select>
+        </div>
+        <button class="btn-submit" onclick="addVideo()">
+          <i class="ti ti-plus" aria-hidden="true"></i> إضافة الفيديو
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BOOK MODAL ===== -->
+  <div class="modal-overlay" id="bookModal" role="dialog" aria-modal="true" aria-label="إضافة كتاب">
+    <div class="modal">
+      <div class="modal-header">
+        <h3><i class="ti ti-book-upload" aria-hidden="true"></i> إضافة كتاب أو PDF</h3>
+        <button class="modal-close" onclick="closeModal('bookModal')" aria-label="إغلاق">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="bookTitle">اسم الكتاب / الملف *</label>
+          <input type="text" id="bookTitle" placeholder="أدخل اسم الكتاب" />
+        </div>
+        <div class="form-group">
+          <label for="bookAuthor">المؤلف</label>
+          <input type="text" id="bookAuthor" placeholder="اسم المؤلف" />
+        </div>
+        <div class="form-group">
+          <label for="bookType">نوع المحتوى</label>
+          <select id="bookType">
+            <option value="pdf">ملف PDF</option>
+            <option value="book">كتاب</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="bookUrl">رابط الملف (اختياري)</label>
+          <input type="url" id="bookUrl" placeholder="https://..." dir="ltr" />
+        </div>
+        <div class="form-group">
+          <label for="bookDesc">وصف مختصر (اختياري)</label>
+          <textarea id="bookDesc" placeholder="وصف موجز عن محتوى الكتاب..."></textarea>
+        </div>
+        <button class="btn-submit" onclick="addBook()">
+          <i class="ti ti-plus" aria-hidden="true"></i> إضافة الكتاب
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== VIDEO VIEWER MODAL ===== -->
+  <div class="modal-overlay" id="videoViewer" role="dialog" aria-modal="true">
+    <div class="modal" style="max-width:540px">
+      <div class="modal-header">
+        <h3 id="viewerTitle">عنوان الفيديو</h3>
+        <button class="modal-close" onclick="closeModal('videoViewer')" aria-label="إغلاق">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="video-player-mock">
+          <div>
+            <div style="font-size:44px;margin-bottom:8px">▶️</div>
+            <p style="font-size:12px">مشغل الفيديو</p>
+            <p style="font-size:11px;margin-top:4px;color:rgba(255,255,255,0.35)" id="viewerAuthor"></p>
+          </div>
+        </div>
+        <div class="video-controls">
+          <button class="ctrl-btn" id="playPauseBtn" onclick="togglePlay()" aria-label="تشغيل/إيقاف">
+            <i class="ti ti-player-play" aria-hidden="true"></i>
+          </button>
+          <div class="progress-bar" onclick="seekVideo(event)" title="الإطار الزمني">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="time-label" id="timeLabel">0:00 / 5:30</span>
+        </div>
+        <p style="font-size:12px;color:var(--text2);text-align:center;margin-top:10px">
+          <i class="ti ti-info-circle" aria-hidden="true"></i>
+          لتشغيل الفيديو الفعلي، أضف رابط يوتيوب عند الإضافة
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ---- State ----
+    let currentSource = 'الكل';
+    let isPlaying = false;
+    let progressInterval = null;
+    let currentProgress = 30;
+
+    const thumbColors = [
+      'linear-gradient(135deg,#0F4A2E,#1D6B44)',
+      'linear-gradient(135deg,#8B6914,#C9A84C)',
+      'linear-gradient(135deg,#185FA5,#378ADD)',
+      'linear-gradient(135deg,#A32D2D,#D85A30)',
+      'linear-gradient(135deg,#533AB7,#7F77DD)',
+      'linear-gradient(135deg,#0F4A2E,#378ADD)',
+    ];
+
+    // ---- Navigation ----
+    function showPage(id, btn) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected','false');
+      });
+      document.getElementById('page-' + id).classList.add('active');
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+    }
+
+    // ---- Modal ----
+    function openModal(id) {
+      document.getElementById(id).classList.add('open');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+    document.querySelectorAll('.modal-overlay').forEach(m => {
+      m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
+      }
+    });
+
+    // ---- Add Video ----
+    function addVideo() {
+      const title  = document.getElementById('videoTitle').value.trim();
+      const author = document.getElementById('videoAuthor').value.trim();
+      const url    = document.getElementById('videoUrl').value.trim();
+      const cat    = document.getElementById('videoCategory').value;
+      if (!title) { alert('الرجاء إدخال عنوان الفيديو'); return; }
+
+      const idx = Math.floor(Math.random() * thumbColors.length);
+      const card = document.createElement('div');
+      card.className = 'video-card';
+
+      const titleSafe = title.replace(/'/g, '&#39;');
+      const authorSafe = (author || 'غير محدد').replace(/'/g, '&#39;');
+
+      card.innerHTML = `
+        <div class="video-thumb" style="background:${thumbColors[idx]}"
+             onclick="openVideoViewer('${titleSafe}','${authorSafe}')" ${url ? `data-url="${url}"` : ''}>
+          <div class="play-btn"><i class="ti ti-player-play" aria-hidden="true"></i></div>
+        </div>
+        <div class="video-meta">
+          <h4>${title}</h4>
+          <p>${author || 'غير محدد'}</p>
+          <span class="video-tag">${cat}</span>
+        </div>
+        <div class="video-actions">
+          <button class="btn-action" onclick="copyLink('${titleSafe}')">
+            <i class="ti ti-share" aria-hidden="true"></i> مشاركة
+          </button>
+          <button class="btn-action danger" onclick="deleteCard(this,'video-card')">
+            <i class="ti ti-trash" aria-hidden="true"></i>
+          </button>
+        </div>`;
+
+      document.getElementById('videoGrid').appendChild(card);
+      ['videoTitle','videoAuthor','videoUrl'].forEach(id => document.getElementById(id).value = '');
+      closeModal('videoModal');
+      showToast('تم إضافة الفيديو بنجاح ✓');
+    }
+
+    // ---- Add Book ----
+    function addBook() {
+      const title  = document.getElementById('bookTitle').value.trim();
+      const author = document.getElementById('bookAuthor').value.trim();
+      const type   = document.getElementById('bookType').value;
+      if (!title) { alert('الرجاء إدخال اسم الكتاب'); return; }
+
+      const emojis = { pdf: '📕', book: '📗' };
+      const covers = { pdf: 'pdf', book: 'arabic' };
+      const card = document.createElement('div');
+      card.className = 'book-card';
+      const titleSafe = title.replace(/'/g, '&#39;');
+      card.setAttribute('onclick', `goToChat('${titleSafe}')`);
+      card.innerHTML = `
+        <div class="book-cover ${covers[type]}">${emojis[type]}</div>
+        <div class="book-meta">
+          <h4>${title}</h4>
+          <p>${author || 'غير محدد'}</p>
+          <span class="book-type ${type}">${type === 'pdf' ? 'PDF' : 'كتاب'}</span>
+        </div>`;
+
+      document.getElementById('booksGrid').appendChild(card);
+      ['bookTitle','bookAuthor','bookUrl','bookDesc'].forEach(id => document.getElementById(id).value = '');
+      closeModal('bookModal');
+      addSourceBtn(title);
+      showToast('تم إضافة الكتاب بنجاح ✓');
+    }
+
+    function addSourceBtn(title) {
+      const bar = document.getElementById('sourceBar');
+      const existing = Array.from(bar.querySelectorAll('.source-btn'))
+        .some(b => b.textContent.trim().includes(title.substring(0,10)));
+      if (existing) return;
+      const btn = document.createElement('button');
+      btn.className = 'source-btn';
+      btn.onclick = function() { setSource(this, title); };
+      const short = title.length > 14 ? title.substring(0,14) + '…' : title;
+      btn.innerHTML = `<i class="ti ti-file" aria-hidden="true"></i> ${short}`;
+      bar.appendChild(btn);
+    }
+
+    // ---- Delete ----
+    function deleteCard(btn, cls) {
+      if (confirm('هل تريد حذف هذا العنصر؟')) {
+        btn.closest('.' + cls).remove();
+        showToast('تم الحذف');
+      }
+    }
+
+    // ---- Copy Link ----
+    function copyLink(title) {
+      const text = `${window.location.href} — ${title}`;
+      navigator.clipboard.writeText(text).then(() => showToast('تم نسخ الرابط ✓'))
+        .catch(() => showToast('لم يتمكن من النسخ'));
+    }
+
+    // ---- Video Viewer ----
+    function openVideoViewer(title, author) {
+      document.getElementById('viewerTitle').textContent = title;
+      document.getElementById('viewerAuthor').textContent = author || '';
+      isPlaying = false;
+      currentProgress = 30;
+      updatePlayBtn();
+      document.getElementById('progressFill').style.width = '30%';
+      document.getElementById('timeLabel').textContent = '1:39 / 5:30';
+      openModal('videoViewer');
+    }
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      updatePlayBtn();
+      if (isPlaying) {
+        progressInterval = setInterval(() => {
+          currentProgress = Math.min(currentProgress + 0.5, 100);
+          document.getElementById('progressFill').style.width = currentProgress + '%';
+          const total = 330;
+          const elapsed = Math.round((currentProgress / 100) * total);
+          const m = Math.floor(elapsed / 60), s = elapsed % 60;
+          document.getElementById('timeLabel').textContent =
+            `${m}:${s.toString().padStart(2,'0')} / 5:30`;
+          if (currentProgress >= 100) {
+            isPlaying = false;
+            clearInterval(progressInterval);
+            updatePlayBtn();
+          }
+        }, 200);
+      } else {
+        clearInterval(progressInterval);
+      }
+    }
+
+    function updatePlayBtn() {
+      const btn = document.getElementById('playPauseBtn');
+      btn.innerHTML = isPlaying
+        ? '<i class="ti ti-player-pause" aria-hidden="true"></i>'
+        : '<i class="ti ti-player-play" aria-hidden="true"></i>';
+    }
+
+    function seekVideo(e) {
+      const bar = e.currentTarget;
+      const rect = bar.getBoundingClientRect();
+      currentProgress = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+      document.getElementById('progressFill').style.width = currentProgress + '%';
+    }
+
+    // ---- Source Selection ----
+    function setSource(btn, name) {
+      document.querySelectorAll('.source-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSource = name;
+    }
+
+    // ---- Go to Chat ----
+    function goToChat(bookTitle) {
+      const tabs = document.querySelectorAll('.nav-tab');
+      showPage('chatbot', tabs[2]);
+      setTimeout(() => {
+        document.getElementById('chatInput').value = `أخبرني عن محتوى: ${bookTitle}`;
+        sendMessage();
+      }, 200);
+    }
+
+    // ---- Fill & Send (suggestions) ----
+    function fillAndSend(text) {
+      document.getElementById('chatInput').value = text;
+      sendMessage();
+    }
+
+    // ---- Auto Resize Textarea ----
+    function autoResize(el) {
+      el.style.height = 'auto';
+      el.style.height = Math.min(el.scrollHeight, 90) + 'px';
+    }
+
+    // ---- Handle Enter Key ----
+    function handleKey(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    }
+
+    // ---- Append Message ----
+    function appendMsg(role, html, source) {
+      const msgs = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'msg ' + role;
+      const av = role === 'user' ? '👤' : '🤖';
+      div.innerHTML = `
+        <div class="msg-avatar">${av}</div>
+        <div>
+          <div class="msg-bubble">${html}</div>
+          ${source ? `<div class="msg-source">📚 ${source}</div>` : ''}
+        </div>`;
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function showTyping() {
+      const msgs = document.getElementById('chatMessages');
+      const div = document.createElement('div');
+      div.className = 'msg bot'; div.id = 'typingIndicator';
+      div.innerHTML = `
+        <div class="msg-avatar">🤖</div>
+        <div><div class="msg-bubble">
+          <div class="typing-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div></div>`;
+      msgs.appendChild(div);
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
+    function removeTyping() {
+      const t = document.getElementById('typingIndicator');
+      if (t) t.remove();
+    }
+
+    // ---- Send Message (Anthropic API) ----
+    async function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      input.style.height = 'auto';
+      document.getElementById('sendBtn').disabled = true;
+
+      appendMsg('user', escapeHtml(text));
+      showTyping();
+
+      const systemPrompt = currentSource !== 'الكل'
+        ? `أنت مساعد لغوي متخصص في منصة "لغتي هويتي" التعليمية لتعليم اللغة العربية. تجيب فقط من محتوى المصدر: "${currentSource}". أجب باللغة العربية، واجعل إجابتك واضحة ومفيدة ومنظمة.`
+        : `أنت مساعد لغوي ذكي لمنصة "لغتي هويتي" لتعليم اللغة العربية. تجيب على الأسئلة المتعلقة بالنحو والصرف والبلاغة والأدب العربي والكتب والملفات في المنصة. أجب باللغة العربية دائماً، وكن واضحاً ومفيداً.`;
+
+      try {
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 1000,
+            system: systemPrompt,
+            messages: [{ role: 'user', content: text }]
+          })
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        const reply = data.content?.[0]?.text || 'عذراً، لم أتمكن من الإجابة.';
+        removeTyping();
+        appendMsg('bot', escapeHtml(reply).replace(/\n/g, '<br>'),
+          currentSource !== 'الكل' ? currentSource : null);
+
+      } catch (err) {
+        removeTyping();
+        appendMsg('bot',
+          'عذراً، حدث خطأ في الاتصال. تأكد من اتصالك بالإنترنت وحاول مجدداً.<br><small style="color:var(--text2)">' + err.message + '</small>');
+      }
+
+      document.getElementById('sendBtn').disabled = false;
+      document.getElementById('chatInput').focus();
+    }
+
+    // ---- Toast Notification ----
+    function showToast(msg) {
+      const existing = document.querySelector('.toast');
+      if (existing) existing.remove();
+      const t = document.createElement('div');
+      t.className = 'toast';
+      t.textContent = msg;
+      Object.assign(t.style, {
+        position: 'fixed', bottom: '24px', left: '50%',
+        transform: 'translateX(-50%)',
+        background: 'var(--green)', color: '#fff',
+        padding: '10px 20px', borderRadius: '20px',
+        fontSize: '13px', zIndex: '999',
+        boxShadow: '0 4px 14px rgba(0,0,0,0.2)',
+        transition: 'opacity 0.4s',
+      });
+      document.body.appendChild(t);
+      setTimeout(() => { t.style.opacity = '0'; setTimeout(() => t.remove(), 400); }, 2500);
+    }
+
+    // ---- Escape HTML ----
+    function escapeHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+  </script>
+</body>
+</html>
