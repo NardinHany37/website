@@ -1,4 +1,3 @@
-# website
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -563,7 +562,7 @@
         </div>
         <div class="video-meta">
           <h4>مقدمة في النحو العربي</h4>
-          <p>بيشوى سليمان</p>
+          <p>د. أحمد فؤاد</p>
           <span class="video-tag">نحو وصرف</span>
         </div>
         <div class="video-actions">
@@ -576,21 +575,11 @@
         </div>
       </div>
 
-     <div class="video-card">
-    <div class="video-thumb"
-         style="background:linear-gradient(135deg,#8B6914,#C9A84C)">
-
-        <div class="play-btn">
-            <i class="ti ti-player-play" aria-hidden="true"></i>
+      <div class="video-card">
+        <div class="video-thumb" style="background:linear-gradient(135deg,#8B6914,#C9A84C)"
+             onclick="openVideoViewer('فن الإلقاء والخطابة','أ. مصطفى كمال')">
+          <div class="play-btn"><i class="ti ti-player-play" aria-hidden="true"></i></div>
         </div>
-
-        <video width="100%" controls>
-            <source src="videos/VID20260624144450.mp4" type="video/mp4">
-            متصفحك لا يدعم الفيديو.
-        </video>
-
-    </div>
-</div>
         <div class="video-meta">
           <h4>فن الإلقاء والخطابة</h4>
           <p>أ. مصطفى كمال</p>
@@ -1124,7 +1113,9 @@
       if (t) t.remove();
     }
 
-    // ---- Send Message (Anthropic API) ----
+    // ---- Send Message (Gemini API - Free) ----
+    const GEMINI_KEY = 'AIzaSyAQ.Ab8RN6L3FxgfZCetHbEwP5jypbA_0zWKRUg0kJOmKpyLO6z1iQ';
+
     async function sendMessage() {
       const input = document.getElementById('chatInput');
       const text = input.value.trim();
@@ -1142,20 +1133,22 @@
         : `أنت مساعد لغوي ذكي لمنصة "لغتي هويتي" لتعليم اللغة العربية. تجيب على الأسئلة المتعلقة بالنحو والصرف والبلاغة والأدب العربي والكتب والملفات في المنصة. أجب باللغة العربية دائماً، وكن واضحاً ومفيداً.`;
 
       try {
-        const res = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-6',
-            max_tokens: 1000,
-            system: systemPrompt,
-            messages: [{ role: 'user', content: text }]
-          })
-        });
+        const res = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              system_instruction: { parts: [{ text: systemPrompt }] },
+              contents: [{ parts: [{ text: text }] }],
+              generationConfig: { maxOutputTokens: 1000, temperature: 0.7 }
+            })
+          }
+        );
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-        const reply = data.content?.[0]?.text || 'عذراً، لم أتمكن من الإجابة.';
+        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'عذراً، لم أتمكن من الإجابة.';
         removeTyping();
         appendMsg('bot', escapeHtml(reply).replace(/\n/g, '<br>'),
           currentSource !== 'الكل' ? currentSource : null);
